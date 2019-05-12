@@ -1,0 +1,46 @@
+The ``interpreter initial`` module
+======================
+
+Using ``interpreter``
+-------------------
+``Interpreter`` from the ``interpreter initial`` module:
+
+This is an example text file in reStructuredText format.  First import
+``interpreter`` from the ``interpreter initial`` module:
+    >>> import Interpreter
+    >>> import attribute
+    >>> import class_builder
+    >>> import relationship
+    >>> import method
+    >>> import module
+    
+    
+    >>> a = Interpreter()
+    >>> a.add_file('','')
+    Error - File not foun
+
+    >>> a = Interpreter()
+    >>> a.add_file('c:/users/owen/class_diagram_plantUML', 'E:/testoutput')
+
+    >>> print(a.my_file)
+    c:/users/owen/class_diagram_plantUML
+    >>> print(len(a.all_my_modules))
+    1
+    >>> print(len(a.all_my_classbuilders))
+    6
+    >>> print(a.all_my_classbuilders[1].name)
+    Module
+    >>> print(len(a.all_my_errors))
+    0
+    >>> print(a.all_my_modules[0].module_name)
+    e:/testoutput
+    >>> a_class = a.all_my_classbuilders[1]
+    >>> print(len(a_class.all_my_attributes))
+    1
+
+    # owens tests
+    >>> print(len(a.all_my_classbuilders[2].all_my_attributes))
+    4
+    >>> print(a.all_my_classbuilders[2].all_my_attributes[0].name)
+    name
+    """
