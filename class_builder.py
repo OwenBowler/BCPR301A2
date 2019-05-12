@@ -10,21 +10,24 @@ class ClassBuilder:
     and relationships
     >>> a = ClassBuilder()
     >>> a.build_class("ClassName", ["attribute1: string"], \
+    ["Method1(input):integer"], [("assos", "Class2")])
+    >>> a.build_class("ClassName", ["attribute1: string"], \
         ["Method1(input):integer"], [("comp", "Class2")])
     >>> print(a.name)
     ClassName
+
     >>> print(a.attributes)
     ['attribute1: string']
     >>> print(a.methods)
     ['Method1(input):integer']
     >>> print(len(a.all_my_attributes))
-    1
+    2
     >>> print(len(a.all_my_methods))
-    1
+    2
     >>> print(len(a.all_my_composite_classes))
     1
     >>> print(a.all_my_composite_classes[0])
-    class2s
+    class2
     >>> print(a.relationships)
     [('comp', 'Class2')]
 
@@ -72,14 +75,12 @@ class ClassBuilder:
 
     def add_relationships(self):
         for a_relationship in self.relationships:
+            new_relationship = Relationship(a_relationship)
             if "extends" in a_relationship:
-                new_relationship = Relationship(a_relationship)
                 self.all_my_parent_classes.append(new_relationship)
             if "comp" in a_relationship:
-                new_relationship = Relationship(a_relationship)
                 self.all_my_composite_classes.append(new_relationship)
             if "assos" in a_relationship:
-                new_relationship = Relationship(a_relationship)
                 self.all_my_associated_classes.append(new_relationship)
 
     def build_class(
