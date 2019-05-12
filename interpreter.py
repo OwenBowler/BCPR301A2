@@ -57,11 +57,6 @@ class Interpreter:
                 ext_class = relationship.split(" ")[0]
                 return tuple(("extends", ext_class))
 
-    def add_class(self, class_name, attributes, methods, relationships):
-        new_class = ClassBuilder()
-        new_class.build_class(class_name, attributes, methods, relationships)
-        self.all_my_classbuilders.append(new_class)
-
     def find_classes(self):
         for class_info in self.my_class_content:
             class_name = class_info.split(' ')[1]
@@ -78,7 +73,9 @@ class Interpreter:
                 if self.find_relationship(relationship, class_name):
                     relationships.append(
                         self.find_relationship(relationship, class_name))
-            self.add_class(class_name, attributes, methods, relationships)
+            new_class = ClassBuilder()
+            new_class.build_class(class_name, attributes, methods, relationships)
+            self.all_my_classbuilders.append(new_class)
 
     def add_module(self, new_module_name, new_classes):
         new_module = Module()
