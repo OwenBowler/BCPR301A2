@@ -1,6 +1,5 @@
 from method import Method
 from attribute import Attribute
-from relationship import Relationship
 
 
 class ClassBuilder:
@@ -12,7 +11,7 @@ class ClassBuilder:
     >>> a.build_class("ClassName", ["attribute1: string"], \
     ["Method1(input):integer"], [("assos", "Class2")])
     >>> a.build_class("ClassName", ["attribute1: string"], \
-        ["Method1(input):integer"], [("comp", "Class2")])
+        ["Method1(input):integer"], [('comp', 'class2')])
     >>> print(a.name)
     ClassName
 
@@ -29,12 +28,12 @@ class ClassBuilder:
     >>> print(a.all_my_composite_classes[0])
     class2
     >>> print(a.relationships)
-    [('comp', 'Class2')]
+    [('comp', 'class2')]
 
     # owens test
     >>> a = ClassBuilder()
     >>> a.build_class('class1', ['attribute1: string', 'attribute2: number'], \
-    ["Method1(input):integer"], [("comp", "Class2")])
+    ["Method1(input):integer"], [('comp', 'class2')])
     >>> print(a.name)
     class1
     >>> print(len(a.all_my_attributes))
@@ -75,13 +74,12 @@ class ClassBuilder:
 
     def add_relationships(self):
         for a_relationship in self.relationships:
-            new_relationship = Relationship(a_relationship)
             if "extends" in a_relationship:
-                self.all_my_parent_classes.append(new_relationship)
+                self.all_my_parent_classes.append(a_relationship[1])
             if "comp" in a_relationship:
-                self.all_my_composite_classes.append(new_relationship)
+                self.all_my_composite_classes.append(a_relationship[1])
             if "assos" in a_relationship:
-                self.all_my_associated_classes.append(new_relationship)
+                self.all_my_associated_classes.append(a_relationship[1])
 
     def build_class(
             self, new_name, new_attributes, new_methods, new_relationships):
