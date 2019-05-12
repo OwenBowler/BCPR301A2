@@ -16,6 +16,13 @@ class MainTests(unittest.TestCase):
         #to be xecuted after each test case
         print("down")
 
+    #Unit test 13 - test db
+    def test_13(self):
+        x = ClassBuilder()
+        x.build_class("ClassName", ["attribute1: string"],
+            ["Method1(input):integer"], ("assos", "Class2"))
+        assert len(x.relationships) > 1
+
     #Unit test 12 - test db
     def test_12(self):
         x = Interpreter()
